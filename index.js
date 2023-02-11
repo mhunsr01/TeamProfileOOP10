@@ -1,7 +1,3 @@
-const Game = require("./lib/Game");
+const Team = require('./lib/Team')
 
-// Initialize a new Game object
-const game = new Game();
-
-// Start playing
-game.play();
+new Team().initializeTeam();

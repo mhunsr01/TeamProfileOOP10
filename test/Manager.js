@@ -1,53 +1,23 @@
-const Child = require("../child");
+const Manager = require('../lib/Manager.js');
 
-describe("Child", () => {
-  // Test for all use cases when initializing a new Child object
-  describe("Initialization", () => {
-    it("should create an object with a name and age if provided valid arguments", () => {
-      const child = new Child("Sarah", 3);
+// test properties, role, and office number 
 
-      // Verify that the new object has the correct properties
-      expect(child.name).toEqual("Sarah");
-      expect(child.age).toEqual(3);
-    });
+const testObject = {name: 'Manager', id: 1, email: "Boss@here.com", officeNumber: "101"}
 
-    it("should throw an error if provided no arguments", () => {
-      // Wrap the object initialization in a callback function that Jest will run
-      const cb = () => new Child();
+test('Checks for inherited Employee properties', () => {
+    const manager = new Manager(testObject);
+    expect(manager.name).toEqual(expect.any(String));
+    expect(manager.id).toEqual(expect.any(Number));
+    expect(manager.email).toEqual(expect.any(String));
+});
 
-      // Verify that an error was thrown in the callback function
-      expect(cb).toThrow();
-    });
+test('Gets Manager role', () => {
+    const manager = new Manager(testObject);
+    expect(manager.getRole()).toBe('Manager');
 
-    it("should throw an error if not provided an age", () => {
-      const cb = () => new Child("Sarah");
+test('Checks for office number', () => {
+    const manager = new Manager(testObject);
+    expect(manager.officeNumber).toEqual(expect.any(String));
+});
 
-      // Define the error message that is expected to be thrown
-      const err = new Error("Expected parameter 'age' to be a non-negative number");
-
-      // Verify that the correct error was thrown when the callback is executed
-      expect(cb).toThrowError(err);
-    });
-
-    it("should throw an error if 'name' is not a string", () => {
-      const cb = () => new Child(3, 2);
-      const err = new Error("Expected parameter 'name' to be a non-empty string");
-
-      expect(cb).toThrowError(err);
-    });
-
-    it("should throw an error if 'age' is not a number", () => {
-      const cb = () => new Child("Sarah", "2");
-      const err = new Error("Expected parameter 'age' to be a non-negative number");
-
-      expect(cb).toThrowError(err);
-    });
-
-    it("should throw an error if 'age' is less than 0", () => {
-      const cb = () => new Child("Sarah", -1);
-      const err = new Error("Expected parameter 'age' to be a non-negative number");
-
-      expect(cb).toThrowError(err);
-    });
-  });
 });

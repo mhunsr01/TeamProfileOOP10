@@ -1,53 +1,30 @@
-const Child = require("../child");
+const Engineer = require('../lib/Engineer.js');
 
-describe("Child", () => {
-  // Test for all use cases when initializing a new Child object
-  describe("Initialization", () => {
-    it("should create an object with a name and age if provided valid arguments", () => {
-      const child = new Child("Sarah", 3);
+// test properties, role, office number, and github 
 
-      // Verify that the new object has the correct properties
-      expect(child.name).toEqual("Sarah");
-      expect(child.age).toEqual(3);
-    });
+const testObject = {name: 'Erenst', id: 2, email: "ernest@here.com", github: "ernest"}
 
-    it("should throw an error if provided no arguments", () => {
-      // Wrap the object initialization in a callback function that Jest will run
-      const cb = () => new Child();
-
-      // Verify that an error was thrown in the callback function
-      expect(cb).toThrow();
-    });
-
-    it("should throw an error if not provided an age", () => {
-      const cb = () => new Child("Sarah");
-
-      // Define the error message that is expected to be thrown
-      const err = new Error("Expected parameter 'age' to be a non-negative number");
-
-      // Verify that the correct error was thrown when the callback is executed
-      expect(cb).toThrowError(err);
-    });
-
-    it("should throw an error if 'name' is not a string", () => {
-      const cb = () => new Child(3, 2);
-      const err = new Error("Expected parameter 'name' to be a non-empty string");
-
-      expect(cb).toThrowError(err);
-    });
-
-    it("should throw an error if 'age' is not a number", () => {
-      const cb = () => new Child("Sarah", "2");
-      const err = new Error("Expected parameter 'age' to be a non-negative number");
-
-      expect(cb).toThrowError(err);
-    });
-
-    it("should throw an error if 'age' is less than 0", () => {
-      const cb = () => new Child("Sarah", -1);
-      const err = new Error("Expected parameter 'age' to be a non-negative number");
-
-      expect(cb).toThrowError(err);
-    });
-  });
+test('Checks for inherited Employee properties', () => {
+    const engineer = new Engineer(testObject);
+    expect(engineer.name).toEqual(expect.any(String));
+    expect(engineer.id).toEqual(expect.any(Number));
+    expect(engineer.email).toEqual(expect.any(String));
 });
+
+test('Gets Engineer role', () => {
+    const engineer = new Engineer(testObject);
+    expect(engineer.getRole()).toBe('Engineer');
+});
+
+test('Checks for office number', () => {
+    const engineer = new Engineer(testObject);
+    expect(engineer.getGithub()).toEqual(expect.any(String));
+});
+
+test('Checks for github', () => {
+    const engineer = new Engineer(testObject);
+    expect(engineer.github).toEqual(expect.any(String));
+});
+
+
+
